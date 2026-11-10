@@ -3,7 +3,7 @@
   "description": "Review edited and deleted messages received by Discord in a local journal.",
   "channels": {
     "dariuss.advanced-message-logger": {
-      "beta": "1.0.0-beta"
+      "beta": "1.0.1-beta"
     }
   }
 }
