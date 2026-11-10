@@ -1,0 +1,31 @@
+{
+  "format": 1,
+  "name": "Adv. Message Logger",
+  "description": "Review edited and deleted messages received by Discord in a local journal.",
+  "plugins": {
+    "dariuss.advanced-message-logger": {
+      "name": "Adv. Message Logger",
+      "description": "Review edited and deleted messages received by Discord in a local journal.",
+      "author": "dariuss",
+      "icon": "ChatMarkUnreadIcon",
+      "channels": {
+        "beta": "1.0.0-beta"
+      },
+      "versions": {
+        "1.0.0-beta": {
+          "url": "https://raw.githubusercontent.com/dariussbezy/Adv.-Message-Logger/refs/heads/main/pool/dariuss.advanced-message-logger@1.0.0-beta.zip",
+          "sha256": "39496f3fe80da9f326efebb4decd2ecac759ad4ee3e3c2f6eb2870a20c637b40",
+          "size": 5195,
+          "dependencies": {
+            "valenced.api": {
+              "version": ">=1 <2"
+            },
+            "discord": {
+              "version": ">=352.6 <352.7"
+            }
+          }
+        }
+      }
+    }
+  }
+}
