@@ -14,8 +14,8 @@
       "versions": {
         "1.0.0-beta": {
           "url": "https://raw.githubusercontent.com/dariussbezy/Adv.-Message-Logger/refs/heads/main/pool/dariuss.advanced-message-logger@1.0.0-beta.zip",
-          "sha256": "39496f3fe80da9f326efebb4decd2ecac759ad4ee3e3c2f6eb2870a20c637b40",
-          "size": 5195,
+          "sha256": "874ed1c3ba71815bbeb9d5c599313ddab632ef2d1a0ade6aa415f79c339a3702",
+          "size": 5222,
           "dependencies": {
             "valenced.api": {
               "version": ">=1 <2"
