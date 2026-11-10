@@ -14,12 +14,12 @@ Version **1.0.0-beta** targets Discord **352.6** and Valenced Plugin API **1**.
 
 ## What this beta includes
 
-- Native Discord settings, a searchable history and message details with **Jump to message** or **Open channel**.
-- Separate edit and deletion switches, bulk deletion capture, filters for bots and self, and ignored server, channel or user IDs.
-- Optional direct message alerts and optional local persistence. History stays in memory by default. You can clear the journal and recent snapshots in Settings.
-- Optional cooperation with [Ghost Ping Logger](https://github.com/dariussbezy/Ghost-Ping-Logger). Both keep their own journals. When both would alert for the same event, Ghost Ping Logger handles the notification.
+- Native settings, separate edited and deleted journals, saved search and date filters, and individual entry removal.
+- In-chat previous message text and retained deleted rows, with configurable colors and timestamps. Discord message, channel, server and user menus provide access to history or ignore controls.
+- Direct message alerts, bulk deletion logging, and All or Loaded-only capture with a configurable recent cache. The journal and recent cache can be saved and cleared separately.
+- Optional cooperation with [Ghost Ping Logger](https://github.com/dariussbezy/Ghost-Ping-Logger). Each plugin keeps its own journal and the same event only triggers one alert when both would notify.
 
-This beta shows logged text in the journal. It does not keep deleted rows in the chat or render edit history inline. It cannot recover messages the client never received and does not upload logs. Native mobile rendering still needs device testing.
+Logging uses events received by this Discord client. Retaining a deleted row requires the original message in Discord's cache. Edit history uses plain text in the native message row. Logs stay on this device.
 
 ## Development
 
