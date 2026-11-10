@@ -1,5 +1,5 @@
 import { useState, useSyncExternalStore } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import { getAssetIdByName } from "@valenced/assets";
 import { AlertActionCreators, ToastActionCreators } from "@valenced/discord/actions";
 import { Design } from "@valenced/discord/design";
@@ -19,6 +19,24 @@ type Storage = { set(data: Data, replace: boolean): Promise<unknown> };
 const actions = new Set<string>(["MESSAGE_CREATE", "MESSAGE_UPDATE", "MESSAGE_DELETE", "MESSAGE_DELETE_BULK"]);
 const day = 24 * 60 * 60 * 1000;
 const inlinePreferences = new Set(["retainDeleted", "showInlineEdits", "colorDeletedUsername", "redName", "deletedMessageColor", "editedMessageColor", "deletedNameColor", "showDeletedTime", "showEditTime", "use12HourClock", "retentionDays"]);
+const colorLabels = {
+  deletedMessageColor: "Deleted message color",
+  editedMessageColor: "Edited message color",
+  deletedNameColor: "Deleted username color",
+};
+type ColorKey = keyof typeof colorLabels;
+const colorKeys = Object.keys(colorLabels) as ColorKey[];
+// Match the presets in Quick Translate's color menu.
+const colorPresets = [
+  ["Red", "#ED4245"], ["Orange", "#F07B3E"], ["Gold", "#F1C40F"],
+  ["Green", "#43B581"], ["Teal", "#1ABC9C"], ["Blue", "#3498DB"],
+  ["Indigo", "#5865F2"], ["Purple", "#9B59B6"], ["Pink", "#EB459E"],
+  ["Gray", "#80848E"],
+] as const;
+
+function ColorSwatch({ color }: { color: string }) {
+  return <View style={{ width: 20, height: 20, borderRadius: 10, backgroundColor: color }} />;
+}
 
 function rowIcon(name: string) {
   const source = getAssetIdByName(name);
@@ -247,6 +265,7 @@ export function defineLogger(mode: Mode) {
   function SettingsComponent() {
     const { settings, entries } = useSyncExternalStore(subscribe, getState, getState);
     const [screen, setScreen] = useState<"main" | "history" | "ignored">("main");
+    const [colorKey, setColorKey] = useState<ColorKey | null>(null);
     const [filter, setFilter] = useState<HistoryFilter>(defaultHistoryFilter);
     const [limit, setLimit] = useState(25);
     const toggle = (key: keyof Settings, label: string, icon: string, subLabel?: string) =>
@@ -260,7 +279,33 @@ export function defineLogger(mode: Mode) {
       setScreen("history");
     };
 
-    return <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={{ padding: 16, paddingBottom: 40, gap: 18 }}>
+    if (colorKey) {
+      const current = settings[colorKey].toUpperCase();
+      const fallback = defaults[colorKey];
+      const select = (color: string) => {
+        update({ [colorKey]: color });
+        setColorKey(null);
+      };
+      return <ScrollView key={colorKey} contentContainerStyle={{ padding: 16, paddingBottom: 40, gap: 16 }}>
+        <Design.Button text="Back to settings" variant="secondary" onPress={() => setColorKey(null)} />
+        <Design.TableRowGroup title={colorLabels[colorKey]}>
+          <Design.TableRow label="Choose a color preset" subLabel="Your choice saves automatically." />
+        </Design.TableRowGroup>
+        <Design.TableRowGroup title="Color presets">
+          {([["Default", fallback], ...colorPresets] as const).map(([label, color]) =>
+            <Design.TableRow key={label} label={label} onPress={() => select(color)}
+              trailing={<View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+                <ColorSwatch color={color} />
+                <View style={{ width: 20 }}>
+                  {current === color && (label === "Default" || color !== fallback) ? rowIcon("CircleCheckIcon") : null}
+                </View>
+              </View>} />)}
+        </Design.TableRowGroup>
+        <Design.Button text="Use default" variant="secondary" onPress={() => select(fallback)} />
+      </ScrollView>;
+    }
+
+    return <ScrollView key="settings" keyboardShouldPersistTaps="handled" contentContainerStyle={{ padding: 16, paddingBottom: 40, gap: 18 }}>
       {screen === "history" ? <>
         <Design.Button text="Back to settings" variant="secondary" onPress={() => setScreen("main")} />
         <HistoryFilters value={filter} onChange={value => { setFilter(value); setLimit(25); }}
@@ -331,13 +376,9 @@ export function defineLogger(mode: Mode) {
           {toggle("showDeletedTime", "Show deletion time", "ClockIcon")}
           {toggle("showEditTime", "Show edit time", "ClockIcon")}
           {toggle("use12HourClock", "Use a 12-hour clock", "ClockIcon")}
+          {!ghost && colorKeys.map(key => <Design.TableRow key={key} label={colorLabels[key]}
+            trailing={<ColorSwatch color={settings[key]} />} arrow onPress={() => setColorKey(key)} />)}
         </Design.TableRowGroup>
-        {(["deletedMessageColor", "editedMessageColor", "deletedNameColor"] as const).map((key, index) =>
-          <SettingInput key={key} label={["Deleted message color", "Edited message color", "Deleted username color"][index]}
-            description="Hex color, for example #ED4245." value={settings[key]} accept={value => {
-              if (!/^#[0-9a-f]{6}$/i.test(value)) return false;
-              update({ [key]: value }); return true;
-            }} />)}
         <Design.TableRowGroup title="Filters">
           <Design.TableRow label="Ignored items" icon={rowIcon("EyeSlashIcon")} arrow onPress={() => setScreen("ignored")} />
         </Design.TableRowGroup>
