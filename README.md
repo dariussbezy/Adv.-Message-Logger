@@ -10,7 +10,7 @@ Add the following URL in **Valenced → Plugins → Advanced**, then install **A
 https://raw.githubusercontent.com/dariussbezy/Adv.-Message-Logger/main/index.json
 ```
 
-Version **1.0.9-beta** requires Valenced Plugin API **1**.
+Version **1.0.10-beta** requires Valenced Plugin API **1**.
 
 ## What this beta includes
 
@@ -19,8 +19,8 @@ Version **1.0.9-beta** requires Valenced Plugin API **1**.
 - Direct message alerts, bulk deletion logging, and All or Loaded-only capture with a configurable recent cache. The journal and recent cache can be saved and cleared separately.
 - Optional cooperation with [Ghost Ping Logger](https://github.com/dariussbezy/Ghost-Ping-Logger). Each plugin keeps its own journal and the same event only triggers one alert when both would notify.
 
-Logging uses events received by this Discord client. On Android, the included native module colors previous versions and displays each edit label at 75% of the message text size. Other platforms use the plain inline history fallback. Logs stay on this device.
+Logging uses events received by this Discord client. Retaining a deleted row requires the original message in Discord's cache. Edit history uses plain text in the native message row. Logs stay on this device.
 
 ## Development
 
-Run `bun install --frozen-lockfile` and then `npm run publish:local` to build the ZIP and regenerate the index. Packaging requires a JDK and Android SDK, selected with `JAVA_HOME` and `ANDROID_HOME`. The package includes only this plugin's DEX classes. Compile-only host declarations and the Xposed API are excluded. Run `npm run lint:types` and `npm test` to check the build.
+Run `bun install --frozen-lockfile` and then `npm run publish:local` to build the ZIP and regenerate the index. Run `npm run lint:types` and `npm test` to check the build.
