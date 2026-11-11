@@ -10,7 +10,7 @@ Add the following URL in **Valenced → Plugins → Advanced**, then install **A
 https://raw.githubusercontent.com/dariussbezy/Adv.-Message-Logger/main/index.json
 ```
 
-Version **1.0.1-beta** requires Valenced Plugin API **1**.
+Version **1.0.2-beta** requires Valenced Plugin API **1**.
 
 ## What this beta includes
 
