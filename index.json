@@ -9,20 +9,18 @@
       "author": "dariuss",
       "icon": "ChatMarkUnreadIcon",
       "channels": {
-        "beta": "1.0.13-beta"
+        "beta": "1.0.0-beta"
       },
       "versions": {
         "1.0.0-beta": {
           "url": "https://raw.githubusercontent.com/dariussbezy/Adv.-Message-Logger/refs/heads/main/pool/dariuss.advanced-message-logger@1.0.0-beta.zip",
-          "sha256": "39bca6582f80cfab1b9af88b468f684f74da6bc1b3fed0e20b50a61dfd5e6455",
-          "size": 12254,
+          "sha256": "2bc88ae2b55a1ff714cd233e45fa2aa1da8616707115b1e29a09d04d073435fd",
+          "size": 14958,
           "dependencies": {
             "valenced.api": {
               "version": ">=1 <2"
             },
-            "discord": {
-              "version": ">=352.6 <352.7"
-            }
+            "discord": {}
           }
         },
         "1.0.1-beta": {
