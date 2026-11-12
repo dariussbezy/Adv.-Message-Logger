@@ -13,9 +13,9 @@
       },
       "versions": {
         "1.0.0-beta": {
-          "url": "https://raw.githubusercontent.com/dariussbezy/Adv.-Message-Logger/df737b85eac0ec06b6cde0cdad1b2ae2dbfd7f24/pool/dariuss.advanced-message-logger@1.0.0-beta.zip",
-          "sha256": "cd74866c33f6c25c9ee4368ba97acbbd666ae8f5173777912fc6e4550c0e489d",
-          "size": 14947,
+          "url": "https://raw.githubusercontent.com/dariussbezy/Adv.-Message-Logger/381abfaaf4dc355cb81d1f88b86150043e48e275/pool/dariuss.advanced-message-logger@1.0.0-beta.zip",
+          "sha256": "9374da07cf3bc642dbe4835d39636bb18b1d7810c8bc4d9de0124afcdd019052",
+          "size": 14984,
           "dependencies": {
             "valenced.api": {
               "version": ">=1 <2"
