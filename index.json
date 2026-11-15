@@ -9,7 +9,6 @@
       "author": "dariussbezy <908767091522420817> (https://github.com/dariussbezy \"GitHub\")",
       "icon": "ChatMarkUnreadIcon",
       "channels": {
-        "beta": "2.1.1",
         "latest": "2.1.1"
       },
       "versions": {
